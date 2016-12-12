@@ -1,0 +1,24 @@
+1 Multilateración
+
+	-- > Buscar algoritmo
+	-- > Ver como implementar en función del número de nodos
+	-- > Implemetar algoritmo en C
+	ENLACES DE INTERES:
+		http://www.ece.umd.edu/~cpap/published/cpap-franco-rt-08.pdf
+		https://www.hindawi.com/journals/mpe/2014/784395/
+		http://www.ijser.org/researchpaper/Wi-Fi-Indoor-Positioning-System-Based-on-RSSI-Measurements.pdf
+		http://www.sci-int.com/pdf/4131434091%20a--2077-%202081-NAVEED%20AHMED%20IT%20(1)--%20PAID.pdf
+		http://www.ece.umd.edu/~cpap/published/cpap-franco-rt-08.pdf
+		http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.715.1221&rep=rep1&type=pdf
+
+2 Servidor Web
+
+	-- > Motar servidor web en una máquina linux
+	-- > Pensar lenguaje de programación para servidor web
+	-- > Aplicación Web que muestre en tiempo real la posición del objeto en el espacio
+
+3 Zigbee potencia
+
+	-- > Mirar API funciones medir potencia, RSSI
+	-- > Programa para retransmitir la potencia de señal
+	-- > Estadística de la potencia de señal recibida
