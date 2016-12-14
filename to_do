@@ -17,8 +17,23 @@
 	-- > Pensar lenguaje de programación para servidor web
 	-- > Aplicación Web que muestre en tiempo real la posición del objeto en el espacio
 
-3 Zigbee potencia
+3 NodeMCU WiFi
 
-	-- > Mirar API funciones medir potencia, RSSI
-	-- > Programa para retransmitir la potencia de señal
-	-- > Estadística de la potencia de señal recibida
+	-- > Documentación wifi: https://nodemcu.readthedocs.io/en/master/en/modules/wifi/
+	-- > Programa AP. 
+
+	ENLACES:
+		https://nodemcu.readthedocs.io/en/master/en/modules/wifi/#wifiapconfig
+
+4 Raspberry pi, por ejemplo:
+	
+	-- > Mirar potencia Wifi AP, de distintos puntos de acceso distintos en un instante de tiempo 
+
+
+Cosas que hacer para el próximo día:
+
+	-- > Traer programa lua configurar AP.
+	-- > Mirar como se flashea NodeMCU devkit.
+	-- > Configurar 1 punto de acceso con NodeMCU.
+
+
