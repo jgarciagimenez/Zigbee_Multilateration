@@ -15,25 +15,18 @@
 
 	-- > Motar servidor web en una máquina linux
 	-- > Pensar lenguaje de programación para servidor web
+		-- > El servidor web se despliega con meteor también.
 	-- > Aplicación Web que muestre en tiempo real la posición del objeto en el espacio
+		-- > Trabajando en apliación web javascript con la librería meteorjs.
 
-3 NodeMCU WiFi
+3 NodeMCU WiFi ----- LISTO
 
-	-- > Documentación wifi: https://nodemcu.readthedocs.io/en/master/en/modules/wifi/
-	-- > Programa AP. 
 
-	ENLACES:
-		https://nodemcu.readthedocs.io/en/master/en/modules/wifi/#wifiapconfig
-
-4 Raspberry pi, por ejemplo:
+4 Elemento a localizar, por ejemplo:
 	
+	-- > Mirar dispositivo a localizar (raspberry, moviel, etc)
 	-- > Mirar potencia Wifi AP, de distintos puntos de acceso distintos en un instante de tiempo 
 
 
-Cosas que hacer para el próximo día:
-
-	-- > Traer programa lua configurar AP.
-	-- > Mirar como se flashea NodeMCU devkit.
-	-- > Configurar 1 punto de acceso con NodeMCU.
 
 
