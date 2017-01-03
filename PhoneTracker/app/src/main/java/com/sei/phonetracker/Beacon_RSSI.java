@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
-import android.os.Debug;
 import android.util.Log;
 
 import java.util.List;
@@ -27,11 +26,19 @@ public class Beacon_RSSI extends AsyncTask<Object, ScanResult, Integer> {
         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
         while(measure){
+            wifiManager.startScan();
             List<ScanResult> aps = wifiManager.getScanResults();
 
             for(ScanResult ap:aps){
-                if(ap.BSSID.startsWith(prefix))
+                if(ap.SSID.startsWith(prefix))
                     publishProgress(ap);
+            }
+
+            try{
+                Thread.sleep(500);
+            }
+            catch(InterruptedException ex){
+
             }
         }
         return 0;
@@ -40,6 +47,6 @@ public class Beacon_RSSI extends AsyncTask<Object, ScanResult, Integer> {
     @Override
     protected void onProgressUpdate(ScanResult... value) {
         super.onProgressUpdate(value);
-        Log.d(value[0].BSSID, ""+value[0].level);
+        Log.d(value[0].SSID, ""+value[0].level);
     }
 }
