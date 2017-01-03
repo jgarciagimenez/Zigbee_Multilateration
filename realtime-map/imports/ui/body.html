@@ -1,0 +1,66 @@
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Realtime-map</h1>
+
+      <form class="new-task">
+        <input type="text" name="text" placeholder="Introduce coordenadas"/>
+      </form>
+    </header>
+
+    <ul>
+      {{#each coordenadas}}
+        {{> coordenada}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <p>
+    <button onclick="myMove()">Activar movimiento</button>
+  </p>
+
+  <style>
+  #container {
+    width: 510px;
+    height: 510px;
+    position: relative;
+    background: yellow;
+  }
+  #animate {
+    width: 10px;
+    height: 10px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    position: absolute;;
+    background-color: black;
+  }
+  </style>
+
+  <div id ="container">
+  <div id ="animate"></div>
+  </div>
+
+  <script>
+
+  function myMove() {
+    var element;
+    var pos = 10;
+    element = document.getElementById("animate");
+    var id = setInterval(frame, 5);
+
+    function frame(){
+      if (pos == 500){
+        clearinterval(id);
+      }
+      else{
+        pos++;
+        element.style.top = pos + 'px';
+        element.style.left = pos + 'px';
+    }
+  }
+  }
+  </script>
+
+</body>
