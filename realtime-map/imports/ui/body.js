@@ -1,17 +1,20 @@
+
+import { Template } from 'meteor/templating';
+
+import { Coordinates } from '../api/coordenadas.js';
+
 import './body.html';
 import './coordenada.js';
 
 Template.body.helpers({
   coordenadas() {
-    const instance = Template.instance();
-
     return Coordinates.find({}, { sort: { createdAt: -1 } });
+  },
+  lastcoor: function() {
+    return Coordinates.find({}, {sort: {DateTime: -1, limit: 1,}}) ;
   },
 });
 
-Template.body.onCreated(function bodyOnCreated() {
-  this.state = new ReactiveDict();
-});
 
 Template.body.events({
   'submit .new-task'(event) {
@@ -32,3 +35,24 @@ Template.body.events({
     target.text.value = '';
   },
 });
+
+function myMove() {
+  var element;
+  window.alert('asldkjfalskdjfal');
+  var pos = 10;
+  var dest = Coordinates.find({}, {sort: {DateTime: -1, limit: 1,}});
+  dest = dest.text;
+  element = document.getElementById("animate");
+  var id = setInterval(frame, 5);
+
+  function frame(){
+    if (pos == number(dest)){
+      clearInterval(id);
+    }
+    else{
+      pos++;
+      element.style.top = pos + 'px';
+      element.style.left = pos + 'px';
+  }
+}
+}

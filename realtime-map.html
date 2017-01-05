@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+    <p>
+      <button onclick="myMove()">Click Me</button>
+    </p>
+
+    <div style="position: absolute;"></div>
+    <style>
+      #target {
+          position:         absolute;
+          width:            10px; /* Or whatever */
+          height:           10px; /* Or whatever */
+          border:           1px solid black;
+          background-color: #000;
+      }
+    </style>
+    <div id="target"></div>
+
+    <script>
+    function myMove() {
+      var element;
+      var pos = 10;
+      element = document.getElementById("target");
+      var id = setInterval(frame, 5);
+
+      function frame(){
+        if (pos == 500){
+          clearinterval(id);
+        }
+        else{
+          pos++;
+          element.style.top = pos + 'px';
+          element.style.left = pos + 'px';
+      }
+    }
+    }
+    </script>
+
+  </body>
+</html>
