@@ -10,8 +10,8 @@
 
 
     <p>
-      <input type="text" name="text" placeholder="coordenada x "/>
-      <input type="text" name="text" placeholder="coordenada y "/>
+      <input type="text" name="text" id="x" placeholder="coordenada x "/>
+      <input type="text" name="text" id="y" placeholder="coordenada y "/>
       <button onclick="myMove()">Comenzar movimiento</button>
     </p>
 
@@ -45,8 +45,8 @@
       var ancho = document.getElementById('ancho');
 
       var container = document.getElementById('container');
-      container.style.height = largo.value * 10 + 'px';
-      container.style.width = ancho.value * 10 + 'px';
+      container.style.height = largo.value * 50 + 'px';
+      container.style.width = ancho.value * 50 + 'px';
 
       largo.value = null;
       ancho.value = null;
@@ -57,24 +57,31 @@
 
     function myMove() {
 
-      var pos = 10;
+    	var x = document.getElementById('x');
+    	var y = document.getElementById('y');
 
-      var element = document.getElementById("animate");
-      var id = setInterval(frame, 1);
-
-
-      function frame(){
-        if (pos == 500){
-          clearInterval(id);
-        }
-        else{
-          pos+=10;
-          element.style.top = pos + 'px';
-          window.alert(element.style.top);
-          element.style.left = pos + 'px';
-      }
+    	var element = document.getElementById("animate");
+    	element.style.top = x.value * 50 + 'px';
+    	element.style.left = y.value * 50 + 'px';
     }
-    }
+
+    //   var pos = 10;
+    //   var element = document.getElementById("animate");
+    //   var id = setInterval(frame, 1);
+    //   window.alert(element.style.top);
+
+    //   function frame(){
+    //     if (pos == 500){
+    //       clearInterval(id);
+    //     }
+    //     else{
+    //       pos+=10;
+    //       element.style.top = pos + 'px';
+          
+    //       element.style.left = pos + 'px';
+    //   }
+    // }
+    // }
     </script>
 
   </body>
