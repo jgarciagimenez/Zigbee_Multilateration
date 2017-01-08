@@ -1,37 +1,76 @@
 <!DOCTYPE html>
+<meta charset="utf-8" />
 <html>
   <body>
+    <h2>Insertar tamano de la habitación</h2>
+    <input type="text" name="largo" id="largo" placeholder="largo"/>
+    <input type="text" name="ancho" id="ancho" placeholder="ancho"/>
+    <input type="button" value="Insertar" id="btnsubmit" onclick="submitForm()">
+    <p> </p>
+
 
     <p>
-      <button onclick="myMove()">Click Me</button>
+      <input type="text" name="text" placeholder="coordenada x "/>
+      <input type="text" name="text" placeholder="coordenada y "/>
+      <button onclick="myMove()">Comenzar movimiento</button>
     </p>
 
-    <div style="position: absolute;"></div>
     <style>
-      #target {
-          position:         absolute;
-          width:            10px; /* Or whatever */
-          height:           10px; /* Or whatever */
-          border:           1px solid black;
-          background-color: #000;
-      }
+    #container {
+      width: 510px;
+      height: 510px;
+      position: relative;
+      background: yellow;
+    }
+    #animate {
+      width: 10px;
+      height: 10px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      position: absolute;;
+      background-color: black;
+    }
     </style>
-    <div id="target"></div>
+
+    <div id ="container">
+    <div id ="animate"></div>
+    </div>
 
     <script>
+
+    function submitForm() {
+
+      var largo = document.getElementById('largo');
+      var ancho = document.getElementById('ancho');
+
+      var container = document.getElementById('container');
+      container.style.height = largo.value * 10 + 'px';
+      container.style.width = ancho.value * 10 + 'px';
+
+      largo.value = null;
+      ancho.value = null;
+
+
+      return false;
+   }
+
     function myMove() {
-      var element;
+
       var pos = 10;
-      element = document.getElementById("target");
-      var id = setInterval(frame, 5);
+
+      var element = document.getElementById("animate");
+      var id = setInterval(frame, 1);
+
 
       function frame(){
         if (pos == 500){
-          clearinterval(id);
+          clearInterval(id);
         }
         else{
-          pos++;
+          pos+=10;
           element.style.top = pos + 'px';
+          window.alert(element.style.top);
           element.style.left = pos + 'px';
       }
     }
