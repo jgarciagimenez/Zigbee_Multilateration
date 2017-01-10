@@ -1,0 +1,11 @@
+Antes de nada hay que instalar el paquete libmysqlclient-dev
+
+sudo apt-get install libmysqlclient-dev
+
+para compilar hay que utilizar las siguientes extensiones de gcc:
+
+gcc probrama.c -o output 'mysql_config --cflags --libs'
+
+para conectarse a la base de datos de manera manual
+
+mysql -h 127.0.0.1 --port 3306 -u root
