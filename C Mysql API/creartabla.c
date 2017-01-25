@@ -19,7 +19,7 @@ int main(int argc, char **argv)
   }
 
   if (mysql_real_connect(con, "127.0.0.1", "root", "",
-          "testdb2", 0, NULL, 0) == NULL)
+          "coordenadas", 0, NULL, 0) == NULL)
   {
       finish_with_error(con);
   }
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
       finish_with_error(con);
   }
 
-  if (mysql_query(con, "CREATE TABLE coor(Id INT, x INT, y INT)")) {
+  if (mysql_query(con, "CREATE TABLE coor(Id INT PRIMARY KEY AUTO_INCREMENT, x INT, y INT)")) {
       finish_with_error(con);
   }
 

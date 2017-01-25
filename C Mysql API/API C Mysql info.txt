@@ -6,6 +6,9 @@ para compilar hay que utilizar las siguientes extensiones de gcc:
 
 gcc probrama.c -o output 'mysql_config --cflags --libs'
 
+gcc creardB.c -o createdb -std=c99 `mysql_config --cflags --libs` --raspberry
+
+
 para conectarse a la base de datos de manera manual
 
 mysql -h 127.0.0.1 --port 3306 -u root
