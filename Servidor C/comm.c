@@ -15,6 +15,7 @@
 #include <netinet/in.h>
 #include <pthread.h>
 #include <string.h>
+#include "Multilateracion.h"
 
 
 #define PORT 6590
@@ -34,7 +35,11 @@ void error(const char *msg)
     exit(1);
 }
 
-void parseData(int id, const char* line, int** data, int* len){
+#define print(...)\
+	printf(__VA_ARGS__);\
+	fflush(stdout)
+
+void parseData(int id, const char* line, float** data, int* len){
 	int mod;
 	char lineCpy[16];
 	char* token;
@@ -49,18 +54,19 @@ void parseData(int id, const char* line, int** data, int* len){
 		mod = atoi(token);
 		if(*len <= mod){
 			(*len)++;
-			(*data) = realloc(*data, *len);
+			(*data) = realloc(*data, sizeof(float*)*(*len));
 		}
-		(*data)[mod] = atoi(strtok(NULL, limit));
-		printf("dist: %d\n", (*data)[mod]);
+		(*data)[mod] = atof(strtok(NULL, limit));
+		print("dist: %f\n", (*data)[mod]);
 	}
 	else if(!strcmp(token, "loc")){
 		int i;
-		printf("Dev: %d\n", id);
+		print("Dev: %d\n", id);
 		for(i=0;i<(*len);i++){
-			printf("Mod %d: %d\n", i, (*data)[i]);
+			print("Mod %d: %f\n", i, (*data)[i]);
 		}
-		//TODO: Llamar a funcion de localizacion
+
+		multilat(*data);
 	}
 }
 
@@ -70,17 +76,17 @@ void* newConnection(void* arg){
 	char buff[16];
 	int connected = 1;
 	int len = 3;
-	int* x = malloc(len*sizeof(int));
+	float* x = malloc(len*sizeof(float*));
 
 	bzero(buff, 16);
 	connected = read(socket, buff, 16);
 	while(connected){
-		printf(buff);
+		print(buff);
 		parseData(id, buff, &x, &len);
 		connected = read(socket, buff, 16);
 	}
 	close(socket);
-	*(conns+id) = NULL;
+	*(conns+id) = 0;
 	pthread_exit(0);
 }
 
@@ -137,7 +143,17 @@ int createServer()
      return 0;
 }
 
-int main(){
+int main(int argc, char *argv[]){
+	float* x = malloc(sizeof(int)*argc/2);
+	float* y = malloc(sizeof(int)*argc/2);
+	int i;
+
+	for(i=0;i<(argc-1)/2;i++){
+		x[i] = atoi(argv[i*2+1]);
+		y[i] = atoi(argv[(i+1)*2]);
+	}
+	multilat_init((argc-1)/2, x, y);
+
 	createServer();
 	return 0;
 }
