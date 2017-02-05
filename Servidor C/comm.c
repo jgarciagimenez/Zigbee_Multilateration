@@ -78,6 +78,8 @@ void* newConnection(void* arg){
 	int len = 3;
 	float* x = malloc(len*sizeof(float*));
 
+	free(arg);
+
 	bzero(buff, 16);
 	connected = read(socket, buff, 16);
 	while(connected){
@@ -92,13 +94,14 @@ void* newConnection(void* arg){
 
 int addConnection(int socket){
 	int n;
-	struct connection conn;
+	struct connection* conn;
 	for(n=0; n<MAX_CONN && conns[n]!=0; n++)
 		;
-	conn.id = n;
-	conn.socket =  socket;
+	conn = malloc(sizeof(struct connection));
+	conn->id = n;
+	conn->socket =  socket;
 	if(n!=MAX_CONN){
-		pthread_create(conns+n, 0, newConnection, &conn);
+		pthread_create(conns+n, 0, newConnection, conn);
 	}
 	else{
 		perror("No se admiten más conexiones.");
