@@ -1,0 +1,140 @@
+<!DOCTYPE html> <meta charset="utf-8" /> <html> <body>
+
+
+  <p> </p>
+
+  <h2>Insertar tamaño de la habitación</h2>
+  <input type="text" name="largo" id="largo" placeholder="largo"/>
+  <input type="text" name="ancho" id="ancho" placeholder="ancho"/>
+  <input type="button" value="Insertar" id="btnsubmit" onclick="submitForm()">
+  <p> </p>
+
+  <p><input type="button" value="Rotar" id="btnsubmit" onclick="cambiarsentido()"></p>
+
+  <style>
+    #container {
+      width: 510px;
+      height: 510px;
+      position: relative;
+      background: #A9D0F5;
+    }
+    #animate {
+      width: 10px;
+      height: 10px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      position: absolute;;
+      background-color: black;
+    }
+  </style>
+
+  <div id ="container">
+    <div id ="animate"></div>
+  </div>
+
+<script>
+
+var timer = setInterval(myTimer,100);
+var timer = setInterval(myMove,200);
+var coordenadas = null;
+var xmax = 500;
+var ymax = 500;
+
+var sentido = 0
+
+function cambiarsentido() {
+  sentido = sentido + 1;
+
+  if (sentido == 4){
+    sentido = 0;
+  }
+}
+
+function submitForm() {
+  var largo = document.getElementById('largo');
+  var ancho = document.getElementById('ancho');
+  var container = document.getElementById('container');
+  container.style.height = (largo.value * 100)+10 + 'px';
+  container.style.width = (ancho.value * 100)+10 + 'px';
+  xmax = largo.value * 100;
+  ymax = ancho.value * 100;
+
+  largo.value = null;
+  ancho.value = null;
+  return false;
+}
+
+function myMove() {
+  //  window.alert(coordenadas.split(" ")[1]);
+
+  var y = coordenadas.split(" ")[1];
+  var x = coordenadas.split(" ")[2];
+
+
+  var element = document.getElementById("animate");
+
+  if (sentido == 0){
+    element.style.top = (xmax- x) + 'px';
+    element.style.left = y + 'px';
+  }
+
+  if (sentido == 1){
+    element.style.top = (xmax - x) + 'px';
+    element.style.left = (ymax - y) + 'px';
+  }
+
+  if (sentido == 2){
+    element.style.top = x + 'px';
+    element.style.left = (ymax - y) + 'px';
+  }
+
+  if (sentido == 3){
+    element.style.top = x + 'px';
+    element.style.left = y + 'px';
+  }
+
+
+
+    //   var pos = 10;
+    //   var element = document.getElementById("animate");
+    //   var id = setInterval(frame, 1);
+    //   window.alert(element.style.top);
+    //   function frame(){
+    //     if (pos == 500){
+    //       clearInterval(id);
+    //     }
+    //     else{
+    //       pos+=10;
+    //       element.style.top = pos + 'px';
+
+    //       element.style.left = pos + 'px';
+    //   }
+    // }
+    // }
+
+
+}
+function myTimer(){
+
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    
+    if (this.readyState == 4 && this.status == 200) {
+     coordenadas = this.responseText;
+      
+    }  
+  };
+  
+  xhttp.open("GET", "test.php", true);
+  xhttp.send();
+   
+}
+
+  </script>
+
+</body>
+</html>
+
+
