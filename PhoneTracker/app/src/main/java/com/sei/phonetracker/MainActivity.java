@@ -9,8 +9,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Beacon_RSSI rssi = null;
     final String ap_prefix = "Node_MCU_";
-    final String IP = "192.168.1.1";
-    final int PORT = 65090;
+    final String IP = "192.168.42.1";
+    final int PORT = 6590;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

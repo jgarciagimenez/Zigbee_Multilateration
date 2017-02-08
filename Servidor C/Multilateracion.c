@@ -44,6 +44,38 @@ void insertar_mysql(int x,int y){
 
 }
 
+#define MIN_GRA2 0.0001
+#define MAX_ITER 20
+#define u 0.5
+
+void ls_dist(float* d, float* px, float* py){
+	float gra_x = 0, gra_y = 0;
+	float a, b, c;
+	int i;
+	static int iter = 0;
+
+	/*Calculo del gradiente del error cuadratico promedio*/
+	for (i=0;i<nsen;i++){
+		a = *px - sen_x[i];
+		b = *py - sen_y[i];
+		c = sqrtf(a*a+b*b);
+		gra_x += a*(1-d[i]/c);
+		gra_y += b*(1-d[i]/c);
+	}
+	gra_x *= 2.0/nsen;
+	gra_y *= 2.0/nsen;
+
+	if(gra_x*gra_x+gra_y*gra_y<MIN_GRA2 || ++iter==MAX_ITER){
+		iter = 0;
+		return;
+	}
+	else{
+		(*px) -= gra_x*u;
+		(*py) -= gra_y*u;
+		ls_dist(d, px, py);
+	}
+}
+
 
 //Calcula los parámetros x e y
 void parametros(float xa, float ya, float xb, float yb, float xc, float yc, float pa, float pb, float pc, float *x, float *y){
@@ -63,10 +95,17 @@ void parametros(float xa, float ya, float xb, float yb, float xc, float yc, floa
 }
 
 void multilat(float* p){
-	float posx=0, posy=0;
-	parametros(sen_x[0], sen_y[0], sen_x[1], sen_y[1], sen_x[2],
-			sen_y[2], p[0], p[1], p[2], &posx, &posy);
-	insertar_mysql(posx, posy);
+	float posx=3, posy=3;
+	int i;
+	//parametros(sen_x[0], sen_y[0], sen_x[1], sen_y[1], sen_x[2],
+		//	sen_y[2], p[0], p[1], p[2], &posx, &posy);
+	for(i=0;i<nsen;i++){
+		p[i] = 0.012*exp(-0.118*p[i]);
+		if(p[i]>5)
+			p[i]=5;
+	}
+	ls_dist(p, &posx, &posy);
+	insertar_mysql(posx*100, posy*100);
 }
 
 void multilat_init(int n, float* x, float*y){

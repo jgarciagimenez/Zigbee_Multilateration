@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Debug;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.IOException;
@@ -37,10 +39,10 @@ public class Beacon_RSSI extends AsyncTask<Object, Object, Integer> {
 
         try {
             socket = new Socket(mainActivity.IP, mainActivity.PORT);
-            out = new PrintWriter(socket.getOutputStream(), true);
+            out = new PrintWriter(socket.getOutputStream(), false);
         }
         catch (IOException exc){
-            Toast.makeText(context, "Error al crear socket", Toast.LENGTH_LONG).show();
+            Log.d("Error Socket", exc.toString());
             return 1;
         }
 
@@ -52,7 +54,7 @@ public class Beacon_RSSI extends AsyncTask<Object, Object, Integer> {
 
                 for (ScanResult ap : aps) {
                     if (ap.SSID.startsWith(prefix)) {
-                        int apIndex = Integer.parseInt(ap.SSID.substring(prefix.length()));
+                        int apIndex = Integer.parseInt(ap.SSID.substring(prefix.length()))-1;
                         while(power.size()<apIndex+1)
                             power.add(0.0);
                         power.set(apIndex, 0.2*power.get(apIndex) + 0.8*ap.level);
@@ -68,9 +70,23 @@ public class Beacon_RSSI extends AsyncTask<Object, Object, Integer> {
             }
 
             for(int i=0; i<power.size();i++){
-                out.println("dist "+i+" "+power.get(i)+" ");
+                out.printf("dist %d %.2f\n", i, power.get(i));
+                out.flush();
+                Log.d("Medida", ""+power.get(i));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+
+                }
             }
             out.println("loc ");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+
+            }
+            out.flush();
+            Log.d("Orden", "Medir");
         }
 
         try {
