@@ -104,6 +104,7 @@ void parametros(float xa, float ya, float xb, float yb, float xc, float yc, floa
 
  //    printf( "P(%.3f,%.3f)", px,py);
 
+
  //    insertar_mysql(x,y);
 
 // }
