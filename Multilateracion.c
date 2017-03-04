@@ -106,6 +106,4 @@ void parametros(float xa, float ya, float xb, float yb, float xc, float yc, floa
 
  //    insertar_mysql(x,y);
 
-
-
 // }
